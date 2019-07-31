@@ -27,7 +27,6 @@ module.exports = (req, res, next) => {
 
   function _authBearer(authString){
     console.log('do the bear auth with ', authString);
-    console.log('🌟',User);
     return User.authenticateToken(authString)
       .then(user=> _authenticate(user))
       .catch(next);
@@ -49,7 +48,9 @@ module.exports = (req, res, next) => {
   function _authenticate(user) {
     if(user) {
       req.user = user;
+      console.log('👋authenitcate user',user);
       req.token = user.generateToken();
+      console.log('💛',req.token.jti);
       next();
     }
     else {
