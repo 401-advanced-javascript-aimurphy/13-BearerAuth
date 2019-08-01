@@ -2,7 +2,10 @@
 
 const User = require('./users-model.js');
 
-module.exports = (req, res, next) => {
+// this middle ware is now curried because we changed it to have the (capability) parameter
+
+module.exports = (capability)=> {
+  return (req, res, next) => {
   
   try {
     let [authType, authString] = req.headers.authorization.split(/\s+/);
@@ -44,9 +47,10 @@ module.exports = (req, res, next) => {
       .then(user => _authenticate(user) )
       .catch(next);
   }
-
+// now our _auth(user) needs also to take in a capability 
+//(user && (!capability ||(user.can(capability))))
   function _authenticate(user) {
-    if(user) {
+    if(user && (!capability ||(user.can(capability)))) {
       req.user = user;
       console.log('👋authenitcate user',user);
       req.token = user.generateToken();
@@ -62,4 +66,6 @@ module.exports = (req, res, next) => {
     next('Invalid User ID/Password');
   }
   
+};
+
 };
