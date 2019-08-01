@@ -5,26 +5,52 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const uuid = require('uuid/v4');
 
+const roles = require('./roles-model.js');
+
 const users = new mongoose.Schema({
   username: {type:String, required:true, unique:true},
   password: {type:String, required:true},
   email: {type: String},
   role: {type: String, default:'user', enum: ['admin','editor','user']},
   jti:{type:String},
+}, {toObject:{virtuals:true}, toJSON:{virtuals:true}});
+
+// we are adding a new column that pulls in the entire role table ^up there is allowing it to happen, below is *how* it wil happen but it doesnt actually implement yet! we need to.. 
+users.virtual('acl',{
+  ref:'roles',
+  localField:'role',
+  foreignField:'role',
+  justOne:true,
 });
+// tell mongo when we pull a record to do this work for us by using pre findone... but then we need to get it into mong. 
+
+users.pre('findOne', function(){
+  try{
+    this.populate('acl');
+  }
+  catch(e){
+    throw new Error(e.message);
+  }
+});
+//now go to mw to authenticate
 
 // const badlist = new mongoose.Schema({
 //   jti:{type:String, required:true}
 // })
 
-const capabilities ={
-  admin: ['create', 'read', 'update', 'delete'],
-  editor:['create', 'read', 'update'],
-  user: ['read']
-}
+// we had this but this isn't a good place for it.
+// const capabilities ={
+//   admin: ['create', 'read', 'update', 'delete'],
+//   editor:['create', 'read', 'update'],
+//   user: ['read']
+// }
+
+
 
 // new method called "can" capability @7:10pm
 users.methods.can = function(capability){
+  return true;
+  // this will not work anymore since we 
   return capabilities[this.role].includes(capability);
 };
 
