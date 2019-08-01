@@ -14,7 +14,7 @@ router.get('/profile', auth(), (req, res)=>{
 
 //mw with a parameter: curry middleware is needed so our auth here can take a param.
 
-// 
+// the auth(*in here is not mw, it acts like mw*)fn is actually returning middleware to us. 
 
 router.get('/openarea', (req, res)=>{
   res.status(200).send('welcome to danger');

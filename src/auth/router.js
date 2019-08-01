@@ -5,7 +5,17 @@ const authRouter = express.Router();
 
 const User = require('./users-model.js');
 const auth = require('./middleware.js');
+const Role = require('./roles-model.js');
 
+
+
+authRouter.post('/roles', (req, res, next) => {
+  let role = new Role(req.body);
+  role.save()
+    .then( (role) => {
+      res.send(role);
+    }).catch(next);
+});
 
 authRouter.post('/signup', (req, res, next) => {
   let user = new User(req.body);
