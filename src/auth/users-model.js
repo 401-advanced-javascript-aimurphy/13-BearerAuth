@@ -17,6 +17,17 @@ const users = new mongoose.Schema({
 //   jti:{type:String, required:true}
 // })
 
+const capabilities ={
+  admin: ['create', 'read', 'update', 'delete'],
+  editor:['create', 'read', 'update'],
+  user: ['read']
+}
+
+// new method called "can" capability @7:10pm
+users.methods.can = function(capability){
+  return capabilities[this.role].includes(capability);
+};
+
 let blacklist = [];
 
 users.pre('save', function(next) {
@@ -71,6 +82,11 @@ users.statics.authenticateBasic = function(auth) {
     .then( user => user && user.comparePassword(auth.password) )
     .catch(error => {throw error;});
 };
+
+// // new method called "can" capability MOVED TO TOP
+// users.methods.can = function(capability){
+//   return true;
+// };
 
 users.methods.comparePassword = function(password) {
   return bcrypt.compare( password, this.password )
