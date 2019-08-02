@@ -16,20 +16,32 @@ router.get('/profile', auth(), (req, res)=>{
 
 // the auth(*in here is not mw, it acts like mw*)fn is actually returning middleware to us. 
 
-router.get('/openarea', (req, res)=>{
-  res.status(200).send('welcome to danger');
+router.get('/public-stuff', (req, res)=>{
+  res.status(200).send('anybody');
 });
 
-router.get('/doc', auth('read'), (req, res)=>{
-  res.status(200).send('read route');
+router.get('/something-to-read', auth('read'), (req, res)=>{
+  res.status(200).send('read capabiilty📚');
 });
 
-router.get('/delete-docs', auth('delete'), (req, res)=>{
-  res.status(200).send('delete');
+router.post('/create-a-thing', auth('create'), (req, res)=>{
+  res.status(200).send('create capability✏️');
 });
 
-router.get('/add', auth('create'), (req, res)=>{
-  res.status(200).send('add things');
+router.put('/update', auth('update'), (req, res)=>{
+  res.status(200).send('you have the update capability📆');
+});
+
+router.patch('/jp', auth('update'), (req, res)=>{
+  res.status(200).send('you have the update capability🤡');
+});
+
+router.delete('/bye-bye', auth('delete'), (req, res)=>{
+  res.status(200).send('you have the delete capability🧻');
+});
+
+router.get('/everything', auth('superuser'), (req, res)=>{
+  res.status(200).send('you have the superuser capability🦸‍♀️');
 });
 
 //now you can make new users adn test them out to see if they can do their capabilities for their role types
