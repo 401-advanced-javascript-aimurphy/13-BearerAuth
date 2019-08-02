@@ -31,11 +31,38 @@ Usage Notes or examples
 * `MONGODB_URI` - URL to the running mongo instance/db
 
 #### Running the app
-* `npm start`
-* Endpoint: `/foo/bar/`
-  * Returns a JSON object with abc in it.
-* Endpoint: `/bing/zing/`
-  * Returns a JSON object with xyz in it.
+signing up users:
+`echo '{"username":"<name>", "password":"<password>", "role":"editor"}'| http post :3000/signup`
+
+basic sign-in:
+`http post :3000/signin -a <name>:<password>`
+
+authenticated sign-in:
+`http post :3000/signin "authorization:bearer header.payload.signature"`
+
+adding roles to db:
+`echo '{"role":"<role title>", "capabilities":["<capability>","<capability>","<capability>"]}'| http post :3000/roles`
+
+testing the general auth capability:
+`http :3000/hidden-stuff "authorization:bearer header.payload.signature"`
+
+testing the read capability:
+`http :3000/some-thing-to-read "authorization:bearer header.payload.signature"`
+
+testing the create capability:
+`http post :3000/create-a-thing "authorization:bearer header.payload.signature"`
+
+testing the update capability:
+`http put :3000/update "authorization:bearer header.payload.signature"`
+
+testing the patch capability:
+`http patch :3000/jp "authorization:bearer header.payload.signature"`
+
+testing the delete capability:
+`http delete :3000/bye-bye "authorization:bearer header.payload.signature"`
+
+testing the capability:
+`http :3000/everything "authorization:bearer header.payload.signature"`
   
 #### Tests
 * How do you run tests?
