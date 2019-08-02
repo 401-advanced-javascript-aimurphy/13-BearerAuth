@@ -5,8 +5,8 @@
 ### Author: Ai
 
 ### Links and Resources
-* [submission PR](http://xyz.com)
-* [travis](http://xyz.com)
+* [submission PR](https://github.com/401-advanced-javascript-aimurphy/13-BearerAuth/pull/6https://github.com/401-advanced-javascript-aimurphy/13-BearerAuth/pull/6)
+* [[![Build Status](https://travis-ci.com/401-advanced-javascript-aimurphy/13-BearerAuth.svg?branch=master)](https://travis-ci.com/401-advanced-javascript-aimurphy/13-BearerAuth)
 * [back-end](http://xyz.com) heroku
 * [front-end](http://xyz.com) (when applicable)
 
@@ -16,18 +16,12 @@
 * [styleguide](http://xyz.com) (React assignments)
 
 ### Modules
-#### `modulename.js`
+#### `users-model` `roles-model`
 ##### Exported Values and Methods
-
-###### `foo(thing) -> string`
-Usage Notes or examples
-
-###### `bar(array) -> array`
-Usage Notes or examples
 
 ### Setup
 #### `.env` requirements
-* `PORT` - Port Number
+* `PORT` - 3000
 * `MONGODB_URI` - URL to the running mongo instance/db
 
 #### Running the app
