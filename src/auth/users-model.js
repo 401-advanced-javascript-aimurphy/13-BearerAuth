@@ -49,9 +49,9 @@ users.pre('findOne', function(){
 
 // new method called "can" capability @7:10pm
 users.methods.can = function(capability){
-  return true;
-  // this will not work anymore since we 
-  return capabilities[this.role].includes(capability);
+  console.log('the capability user can is...',this.acl.capabilities);
+  // return true;
+  return this.acl.capabilities.includes(capability);
 };
 
 let blacklist = [];
