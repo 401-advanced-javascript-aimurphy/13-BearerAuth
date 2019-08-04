@@ -7,13 +7,12 @@
 ### Links and Resources
 * [submission PR](https://github.com/401-advanced-javascript-aimurphy/13-BearerAuth/pull/6https://github.com/401-advanced-javascript-aimurphy/13-BearerAuth/pull/6)
 * [[![Build Status](https://travis-ci.com/401-advanced-javascript-aimurphy/13-BearerAuth.svg?branch=master)](https://travis-ci.com/401-advanced-javascript-aimurphy/13-BearerAuth)
-* [back-end](http://xyz.com) heroku
-* [front-end](http://xyz.com) (when applicable)
+* [back-end]
+* [front-end]
 
 #### Documentation
 * [api docs](http://xyz.com) (API servers)
 * [jsdoc](http://xyz.com) (Server assignments)
-* [styleguide](http://xyz.com) (React assignments)
 
 ### Modules
 #### `users-model` `roles-model`
@@ -21,8 +20,8 @@
 
 ### Setup
 #### `.env` requirements
-* `PORT` - 3000
-* `MONGODB_URI` - URL to the running mongo instance/db
+* `PORT` - :3000
+* `MONGODB_URI` - mongodb://localhost:27017/auth
 
 #### Running the app
 signing up users:

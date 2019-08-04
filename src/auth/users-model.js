@@ -126,6 +126,7 @@ users.methods.generateToken = function() {
     id: this._id,
     role: this.role,
     exp: Math.floor(Date.now() / 1000) + (60*15),
+    // capabilities: this.acl.capabilities,
     jti: uuid()
   };
   
